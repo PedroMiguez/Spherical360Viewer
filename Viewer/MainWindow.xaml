@@ -1,4 +1,4 @@
-﻿<Window x:Class="Spherical360Viewer.MainWindow"
+<Window x:Class="Spherical360Viewer.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,8 +7,10 @@
         xmlns:local="clr-namespace:Spherical360Viewer"
         mc:Ignorable="d"
         Title="Spherical 360 Viewer"
+        KeyUp="Window_KeyUp"
+
         MouseDown="MouseDownHandler" MouseUp="MouseUpHandler" MouseMove="MouseMoveHandler" MouseWheel="MouseWheelHandler" TouchDown="Window_TouchDown" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
-    <Grid  Width="2000" Height="1300">
+    <Grid>
         <Viewport3D x:Name="Viewer" Cursor="Hand">
             <pmg:Sphere x:Name="Wall" Slices="256" Radius="100" Center="0 0 0">
                 <pmg:Sphere.BackMaterial>
