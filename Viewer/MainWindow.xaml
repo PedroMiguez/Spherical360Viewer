@@ -10,7 +10,7 @@
         KeyUp="Window_KeyUp"
 
         MouseDown="MouseDownHandler" MouseUp="MouseUpHandler" MouseMove="MouseMoveHandler" MouseWheel="MouseWheelHandler" TouchDown="Window_TouchDown" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
-    <Grid>
+    <Grid Width="800" Height="600">
         <Viewport3D x:Name="Viewer" Cursor="Hand">
             <pmg:Sphere x:Name="Wall" Slices="256" Radius="100" Center="0 0 0">
                 <pmg:Sphere.BackMaterial>
