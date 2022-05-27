@@ -1,4 +1,5 @@
-﻿using System;
+using FFImageLoading;
+using System;
 using System.Timers;
 using System.Windows;
 using System.Windows.Input;
@@ -12,6 +13,7 @@ namespace Spherical360Viewer
     /// </summary>
     public partial class MainWindow : Window
     {
+        int i = 3;
         public MainWindow()
         {
             InitializeComponent();
@@ -27,7 +29,11 @@ namespace Spherical360Viewer
 
             Width = Convert.ToInt32(ScreenWidth * 0.9);
             Height = Convert.ToInt32(ScreenHeight * 0.9);
+            process_image();
+        }
 
+        private void process_image()
+        {
             BitmapImage Image = new BitmapImage();
             var imageReady = (Action)(() =>
             {
@@ -42,20 +48,17 @@ namespace Spherical360Viewer
                 WallImage.ImageSource = ImageTransform;
             });
 
-            Image.DownloadProgress += new EventHandler<DownloadProgressEventArgs>((sender, e) =>
-                {
-                    DownloadProgress.Value = e.Progress;
-                    DownloadProgressText.Text = e.Progress.ToString() + "%";
-                });
-            Image.DownloadCompleted += new EventHandler((sender, e) => imageReady());
             Image.BeginInit();
-            Image.UriSource = new Uri(App.CommandLine, UriKind.Relative);
+            string caminho = "C:\\Users\\pedro\\Pictures\\teste\\" + i.ToString() + ".jpg";
+            Image.UriSource = new Uri(caminho, UriKind.Relative);
             Image.EndInit();
             if (!Image.IsDownloading)
             {
                 imageReady();
             }
         }
+
+
 
         private Timer inertiaTimer;
 
@@ -71,6 +74,29 @@ namespace Spherical360Viewer
         {
             DownAction(e.GetPosition(this));
         }
+
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.W)
+            {
+                i++;
+                process_image();
+            }
+            if (e.Key == Key.S)
+            {
+                i--;
+                process_image();
+            }
+
+
+            if (e.Key == Key.Escape)
+            {
+               this.Close();
+            }
+
+
+        }
+
 
         private void DownAction(Point position)
         {
